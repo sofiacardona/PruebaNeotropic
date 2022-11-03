@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Animales</h3>
+      <h6>En este programa se muestra un grafico estadistico de acuerdo al tipo de animal que se tenga y su cantidad</h6>
+
+      <table class="mt-5 table table-hover">
+        <thead>
+          <tr>
+            <th>Tipo de animal</th>
+            <th>Cantidad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let animal of animales">
+            <td>{{animal.titulo}}</td>
+            <td>{{animal.stock}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Agregar Animal</h3>
+      <form class="mt-5" (ngSubmit)="create()" [formGroup]="formulario">
+        <div class="mb-3">
+          <label for="titulo"> Animal: </label>
+          <select id="titulo" formControlName="titulo">
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Loro">Loro</option>
+            <option value="Hamster">Hamster</option>
+
+            <div class="text-danger" *ngIf="formulario.controls['titulo'].touched && formulario.controls['titulo'].hasError('required')">
+              El nombre del animal es obligatorio
+            </div>
+        </select>
+        </div>
+        <div class="mb-3">
+          <label for="stock"> Cantidad</label>
+          <input id="stock" type="text" placeholder="cantidad  (debe ser un número entero)" class="form-control" formControlName="stock" pattern="[0-9]+" >
+        </div>
+
+
+        <div class="text-end">
+          <button class="btn btn-primary" >Crear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div echarts [options]="option" class="demo-chart"></div>
+
